@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_medium"
+    android:background="@color/cafe_beige">
+
+    <!-- Header -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_title"
+        android:textSize="@dimen/text_size_heading"
+        android:textStyle="bold"
+        android:textColor="@color/cafe_brown"
+        android:layout_marginBottom="@dimen/spacing_large" />
+
+    <!-- User Info Card -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_medium"
+        android:background="@color/white"
+        android:layout_marginBottom="@dimen/spacing_large">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_user_email"
+            android:textSize="@dimen/text_size_body"
+            android:textColor="@color/text_light" />
+
+        <TextView
+            android:id="@+id/tv_user_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="user@example.com"
+            android:textSize="@dimen/text_size_subtitle"
+            android:textStyle="bold"
+            android:textColor="@color/text_dark" />
+    </LinearLayout>
+
+    <!-- Order History Title -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_order_history"
+        android:textSize="@dimen/text_size_title"
+        android:textStyle="bold"
+        android:textColor="@color/cafe_brown"
+        android:layout_marginBottom="@dimen/spacing_medium" />
+
+    <!-- Order History RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_order_history"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Empty State Message -->
+    <TextView
+        android:id="@+id/tv_no_orders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_orders"
+        android:textSize="@dimen/text_size_body"
+        android:textColor="@color/text_light"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/btn_back_to_home"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="Back to Home"
+        android:textSize="@dimen/text_size_subtitle"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/cafe_brown"
+        android:layout_marginTop="@dimen/spacing_medium" />
+
+</LinearLayout>
+

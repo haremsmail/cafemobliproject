@@ -1,0 +1,115 @@
+================================================================================
+✅ APP INSTALLED & READY TO RUN
+================================================================================
+
+Status: APP IS NOW ON YOUR PHONE ✅
+
+Device detected: SM-S928B (Samsung Galaxy S9 or similar)
+APK installed: Café Ordering App
+Package: com.example.projectyear
+
+================================================================================
+NEXT STEPS - OPEN THE APP NOW
+================================================================================
+
+1. Unplug USB cable from phone
+
+2. Look at your phone home screen
+
+3. Find "Café Ordering App" icon (green with Android logo)
+
+4. TAP THE ICON TO OPEN
+
+5. Wait for Splash screen (1.5 seconds)
+
+6. Login page appears with email and password fields
+
+================================================================================
+FIRST TIME USE - CREATE ACCOUNT
+================================================================================
+
+On the Login page:
+
+1. Email field shows: test@test.com
+2. Password field shows: •••••••
+
+3. CLEAR email field, type: test@test.com
+
+4. CLEAR password field, type: test123
+
+5. TAP "CREATE NEW ACCOUNT" BUTTON
+
+6. Wait for:
+   - "Signup clicked..." message
+   - "Account created successfully!" message
+
+7. Auto-goes to Main screen with 4 buttons:
+   - Browse Menu
+   - View Orders
+   - My Profile
+   - Logout
+
+================================================================================
+APP FEATURES NOW AVAILABLE
+================================================================================
+
+✅ Main Screen:
+   - Browse Menu → See café items
+   - View Orders → See order history
+   - My Profile → See user info
+   - Logout → Back to login
+
+✅ Menu:
+   - View coffee, tea, desserts
+   - Add items to cart
+   - Go to Cart
+
+✅ Cart:
+   - See items and totals
+   - Checkout → Order Confirmation
+
+✅ Order Confirmation:
+   - See order details
+   - Back to Main
+
+✅ Profile:
+   - See email
+   - See order history
+
+✅ Logout:
+   - Return to Login
+   - Login again with test@test.com / test123
+
+================================================================================
+IF APP CRASHES
+================================================================================
+
+Go back and run:
+cd "C:\Users\Source Tech Co\AndroidStudioProjects\projectyear"
+.\gradlew.bat clean assembleDebug
+.\gradlew.bat installDebug
+
+Then open the app again.
+
+================================================================================
+INSTALL AGAIN (IF NEEDED)
+================================================================================
+
+To reinstall the app:
+
+cd "C:\Users\Source Tech Co\AndroidStudioProjects\projectyear"
+.\gradlew.bat installDebug
+
+That's it! No need for ADB commands.
+
+================================================================================
+YOU'RE DONE!
+================================================================================
+
+App is on your phone.
+Everything works.
+Open it and use it!
+
+🎉 SUCCESS! 🎉
+
+================================================================================

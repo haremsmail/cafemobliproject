@@ -1,0 +1,39 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme with café colors -->
+    <style name="Base.Theme.Projectyear" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Café Color Scheme -->
+        <item name="colorPrimary">@color/cafe_brown</item>
+        <item name="colorPrimaryContainer">@color/cafe_cream</item>
+        <item name="colorSecondary">@color/cafe_dark_brown</item>
+        <item name="colorSecondaryContainer">@color/cafe_light_brown</item>
+        <item name="android:colorBackground">@color/cafe_beige</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorError">@color/accent_red</item>
+
+        <!-- Text Colors -->
+        <item name="android:textColorPrimary">@color/text_dark</item>
+        <item name="android:textColorSecondary">@color/text_light</item>
+    </style>
+
+    <style name="Theme.Projectyear" parent="Base.Theme.Projectyear" />
+
+    <!-- Button Style -->
+    <style name="CafeButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/text_size_subtitle</item>
+        <item name="android:padding">@dimen/spacing_medium</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="backgroundTint">@color/cafe_brown</item>
+    </style>
+
+    <!-- Text Styles -->
+    <style name="CafeTitleText">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/cafe_dark_brown</item>
+    </style>
+
+    <style name="CafeBodyText">
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:textColor">@color/text_dark</item>
+    </style>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors - Café Theme -->
+    <color name="cafe_brown">#8B4513</color>
+    <color name="cafe_cream">#F5DEB3</color>
+    <color name="cafe_dark_brown">#D2691E</color>
+    <color name="cafe_light_brown">#A0522D</color>
+    <color name="cafe_beige">#F5F5DC</color>
+
+    <!-- Standard Colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="text_dark">#333333</color>
+    <color name="text_light">#666666</color>
+    <color name="accent_green">#4CAF50</color>
+    <color name="accent_red">#E53935</color>
+    <color name="accent_orange">#FF9800</color>
+    <color name="light_gray">#F0F0F0</color>
+</resources>

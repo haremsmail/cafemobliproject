@@ -1,0 +1,90 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Café Ordering App</string>
+
+    <!-- Splash Activity -->
+    <string name="app_title">☕ CAFÉ ORDERING</string>
+    <string name="app_subtitle">Order Your Favorite Coffee Online</string>
+
+    <!-- Login Activity -->
+    <string name="login_title">Sign In</string>
+    <string name="hint_email">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_signup">CREATE NEW ACCOUNT</string>
+    <string name="error_empty_email">Please enter email</string>
+    <string name="error_empty_password">Please enter password</string>
+    <string name="error_invalid_email">Invalid email format</string>
+    <string name="msg_login_success">Login successful!</string>
+    <string name="msg_signup_success">Account created successfully!</string>
+    <string name="msg_invalid_credentials">Invalid email or password</string>
+
+    <!-- Main Activity -->
+    <string name="welcome_text">Welcome to Café Ordering</string>
+    <string name="home_subtitle">Browse our delicious menu</string>
+    <string name="btn_browse_menu">📋 Browse Menu</string>
+    <string name="btn_view_orders">📦 My Orders</string>
+    <string name="btn_profile">👤 My Profile</string>
+    <string name="btn_logout">🚪 Logout</string>
+
+    <!-- Menu Activity -->
+    <string name="menu_title">Our Menu</string>
+    <string name="filter_all">All Items</string>
+    <string name="filter_coffee">Coffee</string>
+    <string name="filter_tea">Tea</string>
+    <string name="filter_desserts">Desserts</string>
+
+    <!-- Cart Activity -->
+    <string name="cart_title">Your Cart</string>
+    <string name="cart_empty">Your cart is empty</string>
+    <string name="lbl_subtotal">Subtotal:</string>
+    <string name="lbl_tax">Tax (5%):</string>
+    <string name="lbl_total">Total Price:</string>
+    <string name="btn_continue_shopping">Continue Shopping</string>
+    <string name="btn_checkout">Proceed to Checkout</string>
+    <string name="btn_update_cart">Update Cart</string>
+    <string name="msg_item_added">Item added to cart!</string>
+    <string name="msg_item_removed">Item removed from cart</string>
+    <string name="msg_quantity_updated">Quantity updated</string>
+
+    <!-- Order Confirmation Activity -->
+    <string name="confirmation_title">Order Confirmed! ✓</string>
+    <string name="order_details">Order Details</string>
+    <string name="lbl_order_id">Order ID:</string>
+    <string name="lbl_order_time">Order Time:</string>
+    <string name="lbl_status">Status:</string>
+    <string name="status_confirmed">CONFIRMED</string>
+    <string name="msg_thank_you">Thank you for your order!</string>
+    <string name="msg_estimated_time">Estimated ready time: 15 minutes</string>
+    <string name="btn_back_home">Back to Home</string>
+
+    <!-- Profile Activity -->
+    <string name="profile_title">My Profile</string>
+    <string name="lbl_user_email">Email:</string>
+    <string name="lbl_order_history">Order History</string>
+    <string name="no_orders">No orders yet</string>
+    <string name="lbl_date">Date:</string>
+    <string name="lbl_amount">Amount:</string>
+
+    <!-- Menu Items -->
+    <string name="item_espresso">Espresso</string>
+    <string name="item_latte">Latte</string>
+    <string name="item_cappuccino">Cappuccino</string>
+    <string name="item_americano">Americano</string>
+    <string name="item_mocha">Mocha</string>
+    <string name="item_macchiato">Macchiato</string>
+    <string name="item_iced_coffee">Iced Coffee</string>
+    <string name="item_green_tea">Green Tea</string>
+    <string name="item_black_tea">Black Tea</string>
+    <string name="item_chamomile">Chamomile Tea</string>
+    <string name="item_brownie">Chocolate Brownie</string>
+    <string name="item_croissant">Butter Croissant</string>
+    <string name="item_cheesecake">Cheesecake Slice</string>
+
+    <!-- Generic Buttons -->
+    <string name="btn_add_to_cart">Add to Cart</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Cancel</string>
+
+</resources>

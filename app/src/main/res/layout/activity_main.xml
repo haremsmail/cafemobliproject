@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_large"
+    android:background="@color/cafe_beige"
+    tools:context=".MainActivity">
+
+    <!-- Welcome Text -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_text"
+        android:textSize="@dimen/text_size_heading"
+        android:textStyle="bold"
+        android:textColor="@color/cafe_brown"
+        android:textAlignment="center"
+        android:layout_marginBottom="@dimen/spacing_medium" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/home_subtitle"
+        android:textSize="@dimen/text_size_subtitle"
+        android:textColor="@color/text_light"
+        android:textAlignment="center"
+        android:layout_marginBottom="@dimen/spacing_xlarge" />
+
+    <!-- Browse Menu Button -->
+    <Button
+        android:id="@+id/btn_browse_menu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/btn_browse_menu"
+        android:textSize="@dimen/text_size_subtitle"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/cafe_brown"
+        android:layout_marginBottom="@dimen/spacing_medium" />
+
+    <!-- My Orders Button -->
+    <Button
+        android:id="@+id/btn_view_orders"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/btn_view_orders"
+        android:textSize="@dimen/text_size_subtitle"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/cafe_dark_brown"
+        android:layout_marginBottom="@dimen/spacing_medium" />
+
+    <!-- My Profile Button -->
+    <Button
+        android:id="@+id/btn_profile"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/btn_profile"
+        android:textSize="@dimen/text_size_subtitle"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/cafe_light_brown"
+        android:layout_marginBottom="@dimen/spacing_medium" />
+
+    <!-- Logout Button -->
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/btn_logout"
+        android:textSize="@dimen/text_size_subtitle"
+        android:textColor="@color/cafe_brown"
+        android:backgroundTint="@color/cafe_cream" />
+
+</LinearLayout>

@@ -1,0 +1,93 @@
+================================================================================
+ANDROID APP INSTALLATION - WORKING SOLUTION
+================================================================================
+
+Since ADB is not in system PATH, use Gradle to install the APK directly.
+
+STEP 1: ENABLE USB DEBUGGING ON PHONE
+================================================================================
+
+1. Settings → About Phone
+2. Scroll down → Find "Build Number"
+3. Tap "Build Number" 7 times
+4. Back to Settings
+5. System → Developer Options (if not visible, go back to About)
+6. Enable "USB Debugging"
+7. Connect phone with USB cable
+8. Allow USB debugging permission on phone
+
+STEP 2: INSTALL APP USING GRADLE (NO ADB NEEDED)
+================================================================================
+
+Open PowerShell and run:
+
+cd "C:\Users\Source Tech Co\AndroidStudioProjects\projectyear"
+.\gradlew.bat installDebug
+
+That's it! Gradle will:
+- Build the APK
+- Detect connected device via ADB (uses internal ADB)
+- Install the APK automatically
+- Show success message
+
+STEP 3: LAUNCH APP ON PHONE
+================================================================================
+
+1. Unplug phone from USB
+2. Find "Café Ordering App" on home screen
+3. Tap to open
+4. Splash screen appears (1.5 seconds)
+5. Login page shows
+6. Create account or login
+
+TEST ACCOUNT:
+- Email: test@test.com
+- Password: test123
+- Tap "CREATE NEW ACCOUNT"
+- Account created!
+- Main screen appears
+
+================================================================================
+ALTERNATIVE: IF GRADLE DOESN'T WORK
+================================================================================
+
+Use full ADB path directly (Gradle includes ADB):
+
+$adbPath = "C:\Users\Source Tech Co\AppData\Local\Android\Sdk\platform-tools\adb.exe"
+& $adbPath devices
+
+If found, install with:
+& $adbPath uninstall com.example.projectyear
+& $adbPath install "C:\Users\Source Tech Co\AndroidStudioProjects\projectyear\app\build\outputs\apk\debug\app-debug.apk"
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+If Gradle shows "No connected devices":
+1. Check USB Debugging is ON on phone
+2. Unplug and replug USB cable
+3. Grant USB debugging permission popup on phone
+4. Run again: .\gradlew.bat installDebug
+
+If "Build failed":
+1. Ensure APK exists: app/build/outputs/apk/debug/app-debug.apk
+2. If not, rebuild: .\gradlew.bat clean assembleDebug
+3. Then install: .\gradlew.bat installDebug
+
+================================================================================
+READY-TO-RUN COMMANDS
+================================================================================
+
+Copy-paste these in PowerShell:
+
+OPTION 1 - RECOMMENDED (Gradle):
+cd "C:\Users\Source Tech Co\AndroidStudioProjects\projectyear"; .\gradlew.bat installDebug
+
+OPTION 2 - Manual APK install (if ADB found):
+$adbPath = "C:\Users\Source Tech Co\AppData\Local\Android\Sdk\platform-tools\adb.exe"
+& $adbPath uninstall com.example.projectyear
+& $adbPath install "app\build\outputs\apk\debug\app-debug.apk"
+
+================================================================================
+
