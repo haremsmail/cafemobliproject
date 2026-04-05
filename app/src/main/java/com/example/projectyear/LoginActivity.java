@@ -1,74 +1,121 @@
 package com.example.projectyear;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.projectyear.viewmodels.AuthViewModel;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private AuthViewModel authViewModel;
+    private TextInputLayout tilEmail, tilPassword;
+    private TextInputEditText etEmail, etPassword;
+    private MaterialButton btnLogin, btnSignup;
+    private ProgressBar progressLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText emailInput = findViewById(R.id.et_email);
-        EditText passwordInput = findViewById(R.id.et_password);
-        Button loginBtn = findViewById(R.id.btn_login);
-        Button signupBtn = findViewById(R.id.btn_signup);
+        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
 
-        loginBtn.setOnClickListener(v -> {
-            String email = emailInput.getText().toString();
-            String password = passwordInput.getText().toString();
+        tilEmail = findViewById(R.id.til_email);
+        tilPassword = findViewById(R.id.til_password);
+        etEmail = findViewById(R.id.et_email);
+        etPassword = findViewById(R.id.et_password);
+        btnLogin = findViewById(R.id.btn_login);
+        btnSignup = findViewById(R.id.btn_signup);
+        progressLogin = findViewById(R.id.progress_login);
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Enter email and password", Toast.LENGTH_SHORT).show();
-                return;
-            }
+        observeViewModel();
 
-            SharedPreferences prefs = getSharedPreferences("users", MODE_PRIVATE);
-            String savedPassword = prefs.getString(email, null);
-
-            if (savedPassword != null && savedPassword.equals(password)) {
-                SharedPreferences appPrefs = getSharedPreferences("cafe_app", MODE_PRIVATE);
-                appPrefs.edit().putString("logged_in_email", email).apply();
-
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
-            } else {
-                Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
-            }
+        btnLogin.setOnClickListener(v -> {
+            clearErrors();
+            String email = etEmail.getText() != null ? etEmail.getText().toString().trim() : "";
+            String pass = etPassword.getText() != null ? etPassword.getText().toString() : "";
+            authViewModel.login(email, pass);
         });
 
-        signupBtn.setOnClickListener(v -> {
-            String email = emailInput.getText().toString();
-            String password = passwordInput.getText().toString();
-
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Enter email and password", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            SharedPreferences prefs = getSharedPreferences("users", MODE_PRIVATE);
-            String existingPassword = prefs.getString(email, null);
-
-            if (existingPassword != null) {
-                Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            prefs.edit().putString(email, password).apply();
-
-            SharedPreferences appPrefs = getSharedPreferences("cafe_app", MODE_PRIVATE);
-            appPrefs.edit().putString("logged_in_email", email).apply();
-
-            Toast.makeText(this, "Account created! Welcome!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+        btnSignup.setOnClickListener(v -> {
+            clearErrors();
+            String email = etEmail.getText() != null ? etEmail.getText().toString().trim() : "";
+            String pass = etPassword.getText() != null ? etPassword.getText().toString() : "";
+            authViewModel.signup(email, pass);
         });
     }
-}
 
+    private void observeViewModel() {
+        authViewModel.getAuthState().observe(this, state -> {
+            switch (state) {
+                case LOADING:
+                    setLoading(true);
+                    break;
+                case SUCCESS:
+                    setLoading(false);
+                    navigateToMain();
+                    break;
+                case ERROR:
+                    setLoading(false);
+                    break;
+                case IDLE:
+                default:
+                    setLoading(false);
+                    break;
+            }
+        });
+
+        authViewModel.getAuthError().observe(this, error -> {
+            switch (error) {
+                case EMPTY_EMAIL:
+                    tilEmail.setError(getString(R.string.error_empty_email));
+                    break;
+                case INVALID_EMAIL:
+                    tilEmail.setError(getString(R.string.error_invalid_email));
+                    break;
+                case EMPTY_PASSWORD:
+                    tilPassword.setError(getString(R.string.error_empty_password));
+                    break;
+                case SHORT_PASSWORD:
+                    tilPassword.setError(getString(R.string.error_password_short));
+                    break;
+                case INVALID_CREDENTIALS:
+                    Snackbar.make(btnLogin, R.string.error_invalid_credentials, Snackbar.LENGTH_LONG).show();
+                    break;
+                case EMAIL_TAKEN:
+                    tilEmail.setError(getString(R.string.error_email_taken));
+                    break;
+                case NONE:
+                default:
+                    break;
+            }
+        });
+    }
+
+    private void clearErrors() {
+        tilEmail.setError(null);
+        tilPassword.setError(null);
+        authViewModel.resetState();
+    }
+
+    private void setLoading(boolean loading) {
+        progressLogin.setVisibility(loading ? View.VISIBLE : View.GONE);
+        btnLogin.setEnabled(!loading);
+        btnSignup.setEnabled(!loading);
+    }
+
+    private void navigateToMain() {
+        startActivity(new Intent(this, MainActivity.class));
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
+    }
+}

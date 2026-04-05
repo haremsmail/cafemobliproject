@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("com.google.devtools.ksp") version "1.8.22-1.0.11"
 }
 
 android {
@@ -40,7 +39,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.fragment)
     implementation(libs.room.runtime)
-    ksp(libs.room.compiler)
+    annotationProcessor(libs.room.compiler)
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.runtime)
     implementation(libs.cardview)

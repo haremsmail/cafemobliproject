@@ -7,27 +7,26 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectyear.R;
 import com.example.projectyear.database.Order;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * RecyclerView Adapter for displaying order history
- */
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.OrderViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<Order> orders;
 
     public OrderHistoryAdapter(Context context, List<Order> orders) {
         this.context = context;
-        this.orders = orders;
+        this.orders = orders != null ? new ArrayList<>(orders) : new ArrayList<>();
     }
 
     @NonNull
@@ -39,71 +38,62 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-        try {
-            if (orders == null || position >= orders.size()) {
-                return;
-            }
+        Order order = orders.get(position);
 
-            Order order = orders.get(position);
-            if (order == null) {
-                return;
-            }
+        holder.tvOrderId.setText(String.format("Order #%d", order.id));
+        holder.tvOrderDate.setText(formatDate(order.orderDate));
+        holder.tvOrderTotal.setText(String.format("IQD %.0f", order.totalPrice));
 
-            if (holder.tvOrderId != null) {
-                holder.tvOrderId.setText("Order #" + order.id);
-            }
-            if (holder.tvOrderDate != null) {
-                holder.tvOrderDate.setText(formatDate(order.orderDate));
-            }
-            if (holder.tvOrderTotal != null) {
-                holder.tvOrderTotal.setText(String.format("Rs. %.2f", order.totalPrice));
-            }
-            if (holder.tvOrderStatus != null) {
-                holder.tvOrderStatus.setText("Status: " + (order.status != null ? order.status : ""));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        String status = order.status != null ? order.status : "pending";
+        holder.tvOrderStatus.setText(capitalize(status));
+
+        // Status chip color
+        int bgColor, textColor;
+        switch (status.toLowerCase()) {
+            case "confirmed":
+            case "ready":
+                bgColor = ContextCompat.getColor(context, R.color.md_tertiary_container);
+                textColor = ContextCompat.getColor(context, R.color.status_confirmed);
+                break;
+            case "pending":
+                bgColor = ContextCompat.getColor(context, R.color.md_secondary_container);
+                textColor = ContextCompat.getColor(context, R.color.status_pending);
+                break;
+            default:
+                bgColor = ContextCompat.getColor(context, R.color.md_surface_variant);
+                textColor = ContextCompat.getColor(context, R.color.md_on_surface_variant);
         }
+        holder.tvOrderStatus.setBackgroundColor(bgColor);
+        holder.tvOrderStatus.setTextColor(textColor);
     }
 
     @Override
-    public int getItemCount() {
-        return orders.size();
-    }
+    public int getItemCount() { return orders.size(); }
 
-    /**
-     * Update items in the adapter and notify changes
-     */
     public void updateItems(List<Order> newOrders) {
-        this.orders = newOrders;
+        this.orders = newOrders != null ? new ArrayList<>(newOrders) : new ArrayList<>();
         notifyDataSetChanged();
     }
 
-    /**
-     * Format timestamp to readable date
-     */
     private String formatDate(long timestamp) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy • HH:mm", Locale.getDefault());
         return sdf.format(new Date(timestamp));
     }
 
-    public static class OrderViewHolder extends RecyclerView.ViewHolder {
-        TextView tvOrderId;
-        TextView tvOrderDate;
-        TextView tvOrderTotal;
-        TextView tvOrderStatus;
+    private String capitalize(String s) {
+        if (s == null || s.isEmpty()) return "";
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
+    }
 
-        public OrderViewHolder(@NonNull View itemView) {
+    static class OrderViewHolder extends RecyclerView.ViewHolder {
+        TextView tvOrderId, tvOrderDate, tvOrderTotal, tvOrderStatus;
+
+        OrderViewHolder(@NonNull View itemView) {
             super(itemView);
-            try {
-                tvOrderId = itemView.findViewById(R.id.tv_order_id);
-                tvOrderDate = itemView.findViewById(R.id.tv_order_date);
-                tvOrderTotal = itemView.findViewById(R.id.tv_order_total);
-                tvOrderStatus = itemView.findViewById(R.id.tv_order_status);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            tvOrderId = itemView.findViewById(R.id.tv_order_id);
+            tvOrderDate = itemView.findViewById(R.id.tv_order_date);
+            tvOrderTotal = itemView.findViewById(R.id.tv_order_total);
+            tvOrderStatus = itemView.findViewById(R.id.tv_order_status);
         }
     }
 }
-

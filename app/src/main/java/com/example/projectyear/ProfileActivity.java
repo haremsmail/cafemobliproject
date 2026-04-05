@@ -14,7 +14,7 @@ public class ProfileActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("cafe_app", MODE_PRIVATE);
         String email = prefs.getString("logged_in_email", "Unknown");
 
-        Toast.makeText(this, "👤 Profile: " + email + "\n\nTest Orders:\n- Order #001: Rs. 450\n- Order #002: Rs. 320", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "👤 Profile: " + email + "\n\nTest Orders:\n- Order #001: IQD 450\n- Order #002: IQD 320", Toast.LENGTH_LONG).show();
     }
 }
 

@@ -61,7 +61,7 @@
                 android:id="@+id/tv_subtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rs. 0.00"
+                android:text="IQD 0.00"
                 android:textSize="@dimen/text_size_body"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -84,7 +84,7 @@
                 android:id="@+id/tv_tax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rs. 0.00"
+                android:text="IQD 0.00"
                 android:textSize="@dimen/text_size_body"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -115,7 +115,7 @@
                 android:id="@+id/tv_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rs. 0.00"
+                android:text="IQD 0.00"
                 android:textSize="@dimen/text_size_title"
                 android:textStyle="bold"
                 android:textColor="@color/cafe_brown" />

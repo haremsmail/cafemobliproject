@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_background">
+
+    <!-- Cart Items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/card_checkout"
+        android:clipToPadding="false"
+        android:padding="12dp"/>
+
+    <!-- Empty State -->
+    <LinearLayout
+        android:id="@+id/ll_cart_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/card_checkout"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:visibility="gone">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="🛒" android:textSize="64sp" android:layout_marginBottom="16dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="@string/cart_empty_title"
+            android:textSize="22sp" android:textStyle="bold"
+            android:textColor="@color/md_on_surface" android:layout_marginBottom="8dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="@string/cart_empty_subtitle"
+            android:textSize="14sp" android:textColor="@color/md_on_surface_variant"
+            android:gravity="center" android:layout_marginBottom="24dp"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_go_to_menu"
+            style="@style/Widget.Cafe.Button.Tonal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_browse_menu"/>
+    </LinearLayout>
+
+    <!-- Checkout Bar -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        style="@style/Widget.Cafe.Card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Summary rows -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginBottom="4dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/lbl_subtotal"
+                    android:textSize="14sp" android:textColor="@color/md_on_surface_variant"/>
+                <TextView android:id="@+id/tv_subtotal"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="IQD 0" android:textSize="14sp" android:textColor="@color/md_on_surface"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginBottom="8dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/lbl_tax"
+                    android:textSize="14sp" android:textColor="@color/md_on_surface_variant"/>
+                <TextView android:id="@+id/tv_tax"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="IQD 0" android:textSize="14sp" android:textColor="@color/md_on_surface"/>
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp"
+                android:background="@color/md_outline_variant" android:layout_marginBottom="8dp"/>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginBottom="16dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/lbl_total"
+                    android:textSize="17sp" android:textStyle="bold"
+                    android:textColor="@color/md_on_surface"/>
+                <TextView android:id="@+id/tv_total"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="IQD 0" android:textSize="17sp" android:textStyle="bold"
+                    android:textColor="@color/md_primary"/>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_checkout"
+                style="@style/Widget.Cafe.Button"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="@string/btn_checkout"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

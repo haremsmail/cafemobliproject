@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rs. 200.00"
+            android:text="IQD 200.00"
             android:textSize="@dimen/text_size_body"
             android:textColor="@color/cafe_brown" />
     </LinearLayout>
@@ -49,7 +49,7 @@
             android:id="@+id/tv_item_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rs. 400.00"
+            android:text="IQD 400.00"
             android:textSize="@dimen/text_size_body"
             android:textStyle="bold"
             android:textColor="@color/cafe_dark_brown" />

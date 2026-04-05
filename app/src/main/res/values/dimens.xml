@@ -1,36 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Margins and Padding -->
-    <dimen name="spacing_xxsmall">2dp</dimen>
-    <dimen name="spacing_xsmall">4dp</dimen>
+    <!-- Spacing scale (4dp base unit) -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">16dp</dimen>
+    <dimen name="spacing_lg">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_xxl">48dp</dimen>
+
+    <!-- Legacy names (kept for compatibility) -->
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_medium">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
-    <dimen name="spacing_xlarge">32dp</dimen>
 
-    <!-- Text Sizes -->
-    <dimen name="text_size_small">12sp</dimen>
-    <dimen name="text_size_body">14sp</dimen>
+    <!-- Corner radii -->
+    <dimen name="corner_sm">8dp</dimen>
+    <dimen name="corner_md">12dp</dimen>
+    <dimen name="corner_lg">16dp</dimen>
+    <dimen name="corner_xl">24dp</dimen>
+    <dimen name="corner_full">100dp</dimen>
+    <dimen name="button_corner_radius">12dp</dimen>
+
+    <!-- Text sizes -->
+    <dimen name="text_size_splash_title">36sp</dimen>
+    <dimen name="text_size_title">22sp</dimen>
     <dimen name="text_size_subtitle">16sp</dimen>
-    <dimen name="text_size_title">20sp</dimen>
-    <dimen name="text_size_heading">24sp</dimen>
-    <dimen name="text_size_splash_title">32sp</dimen>
+    <dimen name="text_size_body">14sp</dimen>
+    <dimen name="text_size_caption">12sp</dimen>
+    <dimen name="text_size_label">11sp</dimen>
 
-    <!-- Button Sizes -->
-    <dimen name="button_height">48dp</dimen>
-    <dimen name="button_corner_radius">8dp</dimen>
+    <!-- Legacy aliases (old layouts) -->
+    <dimen name="text_size_heading">22sp</dimen>
+    <dimen name="button_height">52dp</dimen>
+    <dimen name="text_size_subtitle_old">14sp</dimen>
 
-    <!-- Card and Item Sizes -->
-    <dimen name="menu_item_height">200dp</dimen>
+    <!-- Component sizes -->
+    <dimen name="bottom_nav_height">64dp</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="avatar_size_lg">72dp</dimen>
+    <dimen name="avatar_size_md">48dp</dimen>
+    <dimen name="icon_size_md">24dp</dimen>
+
+    <!-- Card -->
+    <dimen name="card_elevation">3dp</dimen>
+    <dimen name="card_padding">16dp</dimen>
+
+    <!-- Menu item image -->
     <dimen name="menu_item_image_height">120dp</dimen>
-    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="featured_item_width">160dp</dimen>
+    <dimen name="featured_item_height">200dp</dimen>
 
-    <!-- Image Sizes -->
-    <dimen name="icon_size_small">24dp</dimen>
-    <dimen name="icon_size_medium">32dp</dimen>
-    <dimen name="icon_size_large">48dp</dimen>
-
-    <!-- RecyclerView -->
-    <dimen name="item_spacing">8dp</dimen>
+    <!-- Checkout bar -->
+    <dimen name="checkout_bar_height">80dp</dimen>
 </resources>
-

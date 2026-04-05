@@ -1,90 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Legacy string aliases -->
+    <string name="no_orders">No orders yet. Start ordering!</string>
+
     <!-- App Name -->
-    <string name="app_name">Café Ordering App</string>
+    <string name="app_name">Brew &amp; Co.</string>
 
-    <!-- Splash Activity -->
-    <string name="app_title">☕ CAFÉ ORDERING</string>
-    <string name="app_subtitle">Order Your Favorite Coffee Online</string>
+    <!-- Splash -->
+    <string name="app_title">Brew &amp; Co.</string>
+    <string name="app_subtitle">Your favourite café, one tap away</string>
 
-    <!-- Login Activity -->
-    <string name="login_title">Sign In</string>
-    <string name="hint_email">Email Address</string>
+    <!-- Login/Signup -->
+    <string name="login_title">Welcome back</string>
+    <string name="login_subtitle">Sign in to continue</string>
+    <string name="signup_title">Create account</string>
+    <string name="signup_subtitle">Join us and start ordering</string>
+    <string name="hint_email">Email address</string>
     <string name="hint_password">Password</string>
-    <string name="btn_login">LOGIN</string>
-    <string name="btn_signup">CREATE NEW ACCOUNT</string>
-    <string name="error_empty_email">Please enter email</string>
-    <string name="error_empty_password">Please enter password</string>
-    <string name="error_invalid_email">Invalid email format</string>
-    <string name="msg_login_success">Login successful!</string>
-    <string name="msg_signup_success">Account created successfully!</string>
-    <string name="msg_invalid_credentials">Invalid email or password</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="btn_login">Sign in</string>
+    <string name="btn_signup">Create account</string>
+    <string name="lbl_no_account">Don\'t have an account? Sign up</string>
+    <string name="lbl_have_account">Already have an account? Sign in</string>
+    <string name="error_empty_email">Email is required</string>
+    <string name="error_invalid_email">Enter a valid email address</string>
+    <string name="error_empty_password">Password is required</string>
+    <string name="error_password_short">Password must be at least 6 characters</string>
+    <string name="error_invalid_credentials">Invalid email or password</string>
+    <string name="error_email_taken">This email is already registered</string>
+    <string name="msg_welcome_back">Welcome back!</string>
+    <string name="msg_account_created">Account created! Welcome to Brew &amp; Co.</string>
 
-    <!-- Main Activity -->
-    <string name="welcome_text">Welcome to Café Ordering</string>
-    <string name="home_subtitle">Browse our delicious menu</string>
-    <string name="btn_browse_menu">📋 Browse Menu</string>
-    <string name="btn_view_orders">📦 My Orders</string>
-    <string name="btn_profile">👤 My Profile</string>
-    <string name="btn_logout">🚪 Logout</string>
+    <!-- Bottom Nav -->
+    <string name="nav_home">Home</string>
+    <string name="nav_menu">Menu</string>
+    <string name="nav_cart">Cart</string>
+    <string name="nav_profile">Profile</string>
 
-    <!-- Menu Activity -->
+    <!-- Home -->
+    <string name="greeting_morning">Good morning</string>
+    <string name="greeting_afternoon">Good afternoon</string>
+    <string name="greeting_evening">Good evening</string>
+    <string name="home_tagline">What are you craving?</string>
+    <string name="section_featured">Featured Drinks</string>
+    <string name="section_categories">Browse by Category</string>
+    <string name="cat_coffee">Coffee</string>
+    <string name="cat_tea">Tea</string>
+    <string name="cat_desserts">Desserts</string>
+    <string name="cat_all">All Items</string>
+
+    <!-- Menu -->
     <string name="menu_title">Our Menu</string>
-    <string name="filter_all">All Items</string>
+    <string name="filter_all">All</string>
     <string name="filter_coffee">Coffee</string>
     <string name="filter_tea">Tea</string>
     <string name="filter_desserts">Desserts</string>
+    <string name="menu_empty_title">No items here yet</string>
+    <string name="menu_empty_subtitle">Check back soon for new additions</string>
+    <string name="btn_add_to_cart">Add</string>
+    <string name="btn_added">Added!</string>
+    <string name="msg_added_to_cart">%s added to cart</string>
 
-    <!-- Cart Activity -->
+    <!-- Cart -->
     <string name="cart_title">Your Cart</string>
-    <string name="cart_empty">Your cart is empty</string>
-    <string name="lbl_subtotal">Subtotal:</string>
-    <string name="lbl_tax">Tax (5%):</string>
-    <string name="lbl_total">Total Price:</string>
-    <string name="btn_continue_shopping">Continue Shopping</string>
-    <string name="btn_checkout">Proceed to Checkout</string>
-    <string name="btn_update_cart">Update Cart</string>
-    <string name="msg_item_added">Item added to cart!</string>
+    <string name="cart_empty_title">Your cart is empty</string>
+    <string name="cart_empty_subtitle">Browse our menu and add some items</string>
+    <string name="btn_browse_menu">Browse Menu</string>
+    <string name="lbl_subtotal">Subtotal</string>
+    <string name="lbl_tax">Tax (5%%)</string>
+    <string name="lbl_total">Total</string>
+    <string name="btn_checkout">Checkout</string>
+    <string name="btn_continue_shopping">Continue shopping</string>
     <string name="msg_item_removed">Item removed from cart</string>
-    <string name="msg_quantity_updated">Quantity updated</string>
+    <string name="msg_cart_empty_error">Add items to your cart first</string>
 
-    <!-- Order Confirmation Activity -->
-    <string name="confirmation_title">Order Confirmed! ✓</string>
-    <string name="order_details">Order Details</string>
-    <string name="lbl_order_id">Order ID:</string>
-    <string name="lbl_order_time">Order Time:</string>
-    <string name="lbl_status">Status:</string>
-    <string name="status_confirmed">CONFIRMED</string>
-    <string name="msg_thank_you">Thank you for your order!</string>
-    <string name="msg_estimated_time">Estimated ready time: 15 minutes</string>
+    <!-- Order Confirmation -->
+    <string name="confirmation_title">Order Placed!</string>
+    <string name="confirmation_subtitle">We\'re preparing your order</string>
+    <string name="order_details">Order Summary</string>
+    <string name="lbl_order_id">Order #%d</string>
+    <string name="lbl_order_time">Placed at %s</string>
+    <string name="lbl_estimated">Estimated time</string>
+    <string name="lbl_15_mins">~ 15 minutes</string>
+    <string name="status_confirmed">Confirmed</string>
     <string name="btn_back_home">Back to Home</string>
+    <string name="btn_view_orders">View my orders</string>
 
-    <!-- Profile Activity -->
+    <!-- Profile -->
     <string name="profile_title">My Profile</string>
-    <string name="lbl_user_email">Email:</string>
     <string name="lbl_order_history">Order History</string>
-    <string name="no_orders">No orders yet</string>
-    <string name="lbl_date">Date:</string>
-    <string name="lbl_amount">Amount:</string>
+    <string name="no_orders_title">No orders yet</string>
+    <string name="no_orders_subtitle">Your completed orders will appear here</string>
+    <string name="btn_logout">Sign Out</string>
+    <string name="lbl_member_since">Member since %s</string>
+    <string name="lbl_total_orders">%d orders</string>
 
-    <!-- Menu Items -->
+    <!-- Order status -->
+    <string name="status_pending">Pending</string>
+    <string name="status_ready">Ready</string>
+    <string name="order_id_label">Order #%d</string>
+    <string name="order_total_label">IQD %.2f</string>
+
+    <!-- Menu Items (seeded data) -->
     <string name="item_espresso">Espresso</string>
-    <string name="item_latte">Latte</string>
+    <string name="item_latte">Café Latte</string>
     <string name="item_cappuccino">Cappuccino</string>
     <string name="item_americano">Americano</string>
     <string name="item_mocha">Mocha</string>
     <string name="item_macchiato">Macchiato</string>
     <string name="item_iced_coffee">Iced Coffee</string>
+    <string name="item_flat_white">Flat White</string>
     <string name="item_green_tea">Green Tea</string>
     <string name="item_black_tea">Black Tea</string>
-    <string name="item_chamomile">Chamomile Tea</string>
+    <string name="item_chamomile">Chamomile</string>
     <string name="item_brownie">Chocolate Brownie</string>
     <string name="item_croissant">Butter Croissant</string>
-    <string name="item_cheesecake">Cheesecake Slice</string>
+    <string name="item_cheesecake">Cheesecake</string>
 
-    <!-- Generic Buttons -->
-    <string name="btn_add_to_cart">Add to Cart</string>
+    <!-- Generic -->
+    <string name="btn_view_orders2">My Orders</string>
+    <string name="btn_profile">Profile</string>
     <string name="btn_remove">Remove</string>
     <string name="btn_ok">OK</string>
     <string name="btn_cancel">Cancel</string>
-
+    <string name="btn_view_orders_label">View orders</string>
+    <string name="lbl_date">Date</string>
+    <string name="lbl_amount">Amount</string>
+    <string name="lbl_status">Status</string>
+    <string name="lbl_user_email">Email</string>
+    <string name="welcome_text">Welcome</string>
+    <string name="home_subtitle">What would you like today?</string>
+    <string name="cart_items_count">%d items</string>
+    <string name="btn_view_orders_btn">View Orders</string>
+    <string name="menu_subtitle">Fresh brews &amp; treats</string>
+    <string name="msg_order_placed">Order placed successfully!</string>
 </resources>

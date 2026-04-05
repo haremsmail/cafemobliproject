@@ -1,14 +1,16 @@
 package com.example.projectyear.database;
 
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
 /**
  * Order entity for Room database
  * Stores customer orders with timestamps
  */
 @Entity(tableName = "orders",
+    indices = {@Index("userId")},
     foreignKeys = @ForeignKey(
         entity = User.class,
         parentColumns = "id",

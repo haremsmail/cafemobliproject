@@ -1,14 +1,19 @@
 package com.example.projectyear.database;
 
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
 /**
  * OrderItem entity for Room database
  * Junction table linking orders to menu items with quantities
  */
 @Entity(tableName = "order_items",
+    indices = {
+        @Index("orderId"),
+        @Index("menuItemId")
+    },
     foreignKeys = {
         @ForeignKey(
             entity = Order.class,

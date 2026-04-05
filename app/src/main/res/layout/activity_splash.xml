@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/cafe_cream"
-    android:padding="@dimen/spacing_large">
+    android:background="@drawable/bg_splash">
 
-    <!-- App Title -->
-    <TextView
-        android:id="@+id/tv_splash_title"
+    <LinearLayout
+        android:id="@+id/ll_splash_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_title"
-        android:textSize="@dimen/text_size_splash_title"
-        android:textStyle="bold"
-        android:textColor="@color/cafe_brown"
-        android:textAlignment="center"
-        android:layout_marginBottom="@dimen/spacing_large" />
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:alpha="0">
 
-    <!-- App Subtitle -->
-    <TextView
-        android:id="@+id/tv_splash_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_subtitle"
-        android:textSize="@dimen/text_size_subtitle"
-        android:textColor="@color/cafe_dark_brown"
-        android:textAlignment="center" />
+        <TextView
+            android:id="@+id/tv_splash_emoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="☕"
+            android:textSize="72sp"
+            android:layout_marginBottom="16dp"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_splash_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_title"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="#FFFBF7"
+            android:letterSpacing="0.05"
+            android:layout_marginBottom="8dp"/>
 
+        <TextView
+            android:id="@+id/tv_splash_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_subtitle"
+            android:textSize="15sp"
+            android:textColor="#D8C7C5"
+            android:letterSpacing="0.02"/>
+    </LinearLayout>
+
+</FrameLayout>

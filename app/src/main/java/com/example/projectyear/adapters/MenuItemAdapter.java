@@ -1,39 +1,37 @@
 package com.example.projectyear.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectyear.R;
 import com.example.projectyear.database.MenuItem;
 import com.example.projectyear.models.Cart;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * RecyclerView Adapter for displaying menu items
- */
 public class MenuItemAdapter extends RecyclerView.Adapter<MenuItemAdapter.MenuItemViewHolder> {
-
-    private Context context;
-    private List<MenuItem> items;
-    private OnItemClickListener listener;
 
     public interface OnItemClickListener {
         void onAddToCart(MenuItem item);
     }
 
+    private final Context context;
+    private List<MenuItem> items = new ArrayList<>();
+    private final OnItemClickListener listener;
+
     public MenuItemAdapter(Context context, List<MenuItem> items, OnItemClickListener listener) {
         this.context = context;
-        this.items = items;
+        this.items = items != null ? new ArrayList<>(items) : new ArrayList<>();
         this.listener = listener;
     }
 
@@ -46,53 +44,28 @@ public class MenuItemAdapter extends RecyclerView.Adapter<MenuItemAdapter.MenuIt
 
     @Override
     public void onBindViewHolder(@NonNull MenuItemViewHolder holder, int position) {
-        try {
-            if (items == null || position >= items.size()) {
-                return;
-            }
+        MenuItem item = items.get(position);
 
-            MenuItem item = items.get(position);
-            if (item == null) {
-                return;
-            }
+        holder.tvEmoji.setText(getEmoji(item.category));
+        holder.tvName.setText(item.name);
+        holder.tvDescription.setText(item.description);
+        holder.tvPrice.setText(String.format("IQD %.0f", item.price));
+        holder.tvCategory.setText(item.category);
 
-            if (holder.tvItemName != null) {
-                holder.tvItemName.setText(item.name != null ? item.name : "");
-            }
-            if (holder.tvDescription != null) {
-                holder.tvDescription.setText(item.description != null ? item.description : "");
-            }
-            if (holder.tvPrice != null) {
-                holder.tvPrice.setText(String.format("Rs. %.2f", item.price));
-            }
-            if (holder.tvCategory != null) {
-                holder.tvCategory.setText(item.category != null ? item.category : "");
-            }
-
-            if (holder.ivItemImage != null) {
-                if (item.imageResource != 0) {
-                    holder.ivItemImage.setImageResource(item.imageResource);
-                } else {
-                    holder.ivItemImage.setImageResource(R.drawable.ic_launcher_background);
-                }
-            }
-
-            if (holder.btnAddToCart != null) {
-                holder.btnAddToCart.setOnClickListener(v -> {
-                    try {
-                        Cart.addItem(item.id, item.name, item.price);
-                        Toast.makeText(context, item.name + " added to cart!", Toast.LENGTH_SHORT).show();
-                        if (listener != null) {
-                            listener.onAddToCart(item);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        boolean inCart = Cart.getAllItems().containsKey(item.id);
+        if (inCart) {
+            holder.tvAddToCart.setText("Added ✓");
+            holder.tvAddToCart.setBackgroundResource(R.drawable.bg_chip_selected);
+        } else {
+            holder.tvAddToCart.setText("+ Add");
+            holder.tvAddToCart.setBackgroundResource(R.drawable.bg_chip_primary);
         }
+
+        holder.tvAddToCart.setOnClickListener(v -> {
+            if (listener != null) listener.onAddToCart(item);
+            holder.tvAddToCart.setText("Added ✓");
+            holder.tvAddToCart.setBackgroundResource(R.drawable.bg_chip_selected);
+        });
     }
 
     @Override
@@ -100,35 +73,43 @@ public class MenuItemAdapter extends RecyclerView.Adapter<MenuItemAdapter.MenuIt
         return items.size();
     }
 
-    /**
-     * Update the list of items
-     */
     public void updateItems(List<MenuItem> newItems) {
-        this.items = newItems;
-        notifyDataSetChanged();
+        final List<MenuItem> safeNew = (newItems == null) ? new ArrayList<>() : newItems;
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override public int getOldListSize() { return items.size(); }
+            @Override public int getNewListSize() { return safeNew.size(); }
+            @Override public boolean areItemsTheSame(int oldPos, int newPos) {
+                return items.get(oldPos).id == safeNew.get(newPos).id;
+            }
+            @Override public boolean areContentsTheSame(int oldPos, int newPos) {
+                return items.get(oldPos).name.equals(safeNew.get(newPos).name);
+            }
+        });
+        items = new ArrayList<>(safeNew);
+        result.dispatchUpdatesTo(this);
     }
 
-    public static class MenuItemViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivItemImage;
-        TextView tvItemName;
-        TextView tvDescription;
-        TextView tvPrice;
-        TextView tvCategory;
-        Button btnAddToCart;
+    private String getEmoji(String category) {
+        if (category == null) return "☕";
+        switch (category) {
+            case "Coffee": return "☕";
+            case "Tea": return "🍵";
+            case "Desserts": return "🍰";
+            default: return "☕";
+        }
+    }
 
-        public MenuItemViewHolder(@NonNull View itemView) {
+    static class MenuItemViewHolder extends RecyclerView.ViewHolder {
+        TextView tvEmoji, tvName, tvDescription, tvPrice, tvCategory, tvAddToCart;
+
+        MenuItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            try {
-                ivItemImage = itemView.findViewById(R.id.iv_item_image);
-                tvItemName = itemView.findViewById(R.id.tv_item_name);
-                tvDescription = itemView.findViewById(R.id.tv_description);
-                tvPrice = itemView.findViewById(R.id.tv_price);
-                tvCategory = itemView.findViewById(R.id.tv_category);
-                btnAddToCart = itemView.findViewById(R.id.btn_add_to_cart);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            tvEmoji = itemView.findViewById(R.id.tv_item_emoji);
+            tvName = itemView.findViewById(R.id.tv_item_name);
+            tvDescription = itemView.findViewById(R.id.tv_description);
+            tvPrice = itemView.findViewById(R.id.tv_price);
+            tvCategory = itemView.findViewById(R.id.tv_category);
+            tvAddToCart = itemView.findViewById(R.id.tv_add_to_cart);
         }
     }
 }
-

@@ -1,19 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Colors - Café Theme -->
-    <color name="cafe_brown">#8B4513</color>
-    <color name="cafe_cream">#F5DEB3</color>
-    <color name="cafe_dark_brown">#D2691E</color>
-    <color name="cafe_light_brown">#A0522D</color>
-    <color name="cafe_beige">#F5F5DC</color>
+    <!-- Primary — Deep Espresso -->
+    <color name="md_primary">#4E342E</color>
+    <color name="md_on_primary">#FFFFFF</color>
+    <color name="md_primary_container">#BCAAA4</color>
+    <color name="md_on_primary_container">#1A0800</color>
 
-    <!-- Standard Colors -->
-    <color name="black">#FF000000</color>
+    <!-- Secondary — Amber/Caramel -->
+    <color name="md_secondary">#FF8F00</color>
+    <color name="md_on_secondary">#FFFFFF</color>
+    <color name="md_secondary_container">#FFF8E1</color>
+    <color name="md_on_secondary_container">#FF6F00</color>
+
+    <!-- Tertiary — Sage green for status -->
+    <color name="md_tertiary">#558B2F</color>
+    <color name="md_on_tertiary">#FFFFFF</color>
+    <color name="md_tertiary_container">#DCEDC8</color>
+    <color name="md_on_tertiary_container">#1B5E20</color>
+
+    <!-- Surfaces -->
+    <color name="md_surface">#FFFBF7</color>
+    <color name="md_on_surface">#1C1B1F</color>
+    <color name="md_surface_variant">#F3EBE6</color>
+    <color name="md_on_surface_variant">#4D4341</color>
+    <color name="md_background">#F5EFE7</color>
+    <color name="md_on_background">#1C1B1F</color>
+
+    <!-- Outline & Dividers -->
+    <color name="md_outline">#988F8D</color>
+    <color name="md_outline_variant">#D8C7C5</color>
+
+    <!-- Error -->
+    <color name="md_error">#B00020</color>
+    <color name="md_on_error">#FFFFFF</color>
+    <color name="md_error_container">#FDECEA</color>
+
+    <!-- Elevation overlays -->
+    <color name="elevation_1">#F9F4F0</color>
+    <color name="elevation_2">#F5EFE9</color>
+
+    <!-- Status colors -->
+    <color name="status_confirmed">#2E7D32</color>
+    <color name="status_pending">#E65100</color>
+    <color name="status_ready">#1565C0</color>
+
+    <!-- Legacy aliases still referenced in code -->
+    <color name="cafe_brown">#4E342E</color>
+    <color name="cafe_cream">#FFF8E1</color>
+    <color name="cafe_dark_brown">#3E2723</color>
+    <color name="cafe_light_brown">#BCAAA4</color>
+    <color name="cafe_beige">#F5EFE7</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="text_dark">#333333</color>
-    <color name="text_light">#666666</color>
-    <color name="accent_green">#4CAF50</color>
-    <color name="accent_red">#E53935</color>
-    <color name="accent_orange">#FF9800</color>
-    <color name="light_gray">#F0F0F0</color>
+    <color name="black">#FF000000</color>
+    <color name="text_dark">#1C1B1F</color>
+    <color name="text_light">#4D4341</color>
+    <color name="accent_green">#2E7D32</color>
+    <color name="accent_red">#B00020</color>
+    <color name="accent_orange">#FF8F00</color>
+    <color name="light_gray">#F3EBE6</color>
 </resources>

@@ -1,98 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.Cafe.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_small"
-    app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="4dp"
-    app:cardBackgroundColor="@color/white">
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <!-- Item Image -->
-        <ImageView
-            android:id="@+id/iv_item_image"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/menu_item_image_height"
-            android:scaleType="centerCrop"
-            android:background="@color/light_gray" />
-
-        <!-- Item Info Section -->
+        <!-- Top: emoji + category -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/spacing_medium">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
 
-            <!-- Category -->
             <TextView
-                android:id="@+id/tv_category"
+                android:id="@+id/tv_item_emoji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Coffee"
-                android:textSize="@dimen/text_size_small"
-                android:textColor="@color/cafe_dark_brown"
-                android:textStyle="bold"
-                android:layout_marginBottom="@dimen/spacing_xsmall" />
+                android:text="☕"
+                android:textSize="36sp"
+                android:layout_marginEnd="10dp"/>
 
-            <!-- Item Name -->
-            <TextView
-                android:id="@+id/tv_item_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Espresso"
-                android:textSize="@dimen/text_size_subtitle"
-                android:textStyle="bold"
-                android:textColor="@color/text_dark"
-                android:layout_marginBottom="@dimen/spacing_xsmall" />
-
-            <!-- Description -->
-            <TextView
-                android:id="@+id/tv_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Rich and strong coffee"
-                android:textSize="@dimen/text_size_small"
-                android:textColor="@color/text_light"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                android:maxLines="2"
-                android:ellipsize="end" />
-
-            <!-- Price and Button -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:spacing="@dimen/spacing_medium">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                <!-- Price -->
                 <TextView
-                    android:id="@+id/tv_price"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Rs. 150"
-                    android:textSize="@dimen/text_size_subtitle"
-                    android:textStyle="bold"
-                    android:textColor="@color/cafe_brown" />
-
-                <!-- Add to Cart Button -->
-                <Button
-                    android:id="@+id/btn_add_to_cart"
+                    android:id="@+id/tv_item_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:text="@string/btn_add_to_cart"
-                    android:textSize="@dimen/text_size_small"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/cafe_brown"
-                    android:paddingHorizontal="@dimen/spacing_medium" />
+                    android:layout_height="wrap_content"
+                    android:text="Item Name"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/md_on_surface"
+                    android:layout_marginBottom="2dp"/>
+
+                <TextView
+                    android:id="@+id/tv_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category"
+                    android:textSize="11sp"
+                    android:textColor="@color/md_secondary"
+                    android:textStyle="bold"/>
+
             </LinearLayout>
+
         </LinearLayout>
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textSize="12sp"
+            android:textColor="@color/md_on_surface_variant"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Price + Add button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="IQD 0"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/md_primary"/>
+
+            <TextView
+                android:id="@+id/tv_add_to_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+ Add"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/bg_chip_primary"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
-
