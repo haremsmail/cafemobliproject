@@ -11,6 +11,7 @@ import com.example.projectyear.fragments.CartFragment;
 import com.example.projectyear.fragments.HomeFragment;
 import com.example.projectyear.fragments.MenuFragment;
 import com.example.projectyear.fragments.ProfileFragment;
+import com.example.projectyear.fragments.TableFragment;
 import com.example.projectyear.viewmodels.AuthViewModel;
 import com.example.projectyear.viewmodels.CartViewModel;
 import com.google.android.material.badge.BadgeDrawable;
@@ -18,23 +19,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private AuthViewModel authViewModel;
     private CartViewModel cartViewModel;
     private BottomNavigationView bottomNav;
-    private int tableNumber = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Get table number from intent
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("TABLE_NUMBER")) {
-            tableNumber = intent.getIntExtra("TABLE_NUMBER", -1);
-            setTitle("Table " + tableNumber);
-        }
-
-        AuthViewModel authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
+        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
 
         // Guard: redirect to login if not authenticated
         if (!authViewModel.isLoggedIn()) {
@@ -49,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
         setupBottomNav();
         observeCart();
 
-        // Default to Menu if coming from table selection
+        // Default to Table selection if none set, otherwise Home
         if (savedInstanceState == null) {
-            if (tableNumber != -1) {
-                loadFragment(new MenuFragment());
-                bottomNav.setSelectedItemId(R.id.nav_menu);
+            int table = getSharedPreferences("cafe_app", MODE_PRIVATE).getInt("selected_table", -1);
+            if (table <= 0) {
+                navigateTo(R.id.nav_table);
             } else {
                 loadFragment(new HomeFragment());
             }
@@ -66,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = null;
             if (id == R.id.nav_home) {
                 fragment = new HomeFragment();
+            } else if (id == R.id.nav_table) {
+                fragment = new TableFragment();
             } else if (id == R.id.nav_menu) {
                 fragment = new MenuFragment();
             } else if (id == R.id.nav_cart) {

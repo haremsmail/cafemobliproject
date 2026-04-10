@@ -89,21 +89,11 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     }
 
     public void updateItems(List<Cart.CartItem> newItems) {
-        final List<Cart.CartItem> safeNew = (newItems == null) ? new ArrayList<>() : newItems;
-        DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
-            final List<Cart.CartItem> old = items;
-            final List<Cart.CartItem> next = safeNew;
-            @Override public int getOldListSize() { return old.size(); }
-            @Override public int getNewListSize() { return next.size(); }
-            @Override public boolean areItemsTheSame(int o, int n) {
-                return old.get(o).menuItemId == next.get(n).menuItemId;
-            }
-            @Override public boolean areContentsTheSame(int o, int n) {
-                return old.get(o).quantity == next.get(n).quantity;
-            }
-        });
-        items = new ArrayList<>(safeNew);
-        result.dispatchUpdatesTo(this);
+        // Since we are modifying the same objects in the static Cart, DiffUtil will fail to see changes
+        // because old and next reference the same memory address with the updated value.
+        // We will just do a hard refresh here for reliability on small lists.
+        this.items = new ArrayList<>(newItems == null ? new ArrayList<>() : newItems);
+        notifyDataSetChanged();
     }
 
     static class CartItemViewHolder extends RecyclerView.ViewHolder {

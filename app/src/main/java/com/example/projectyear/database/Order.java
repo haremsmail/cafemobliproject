@@ -23,12 +23,14 @@ public class Order {
     public int id;
 
     public int userId;
+    public int tableNumber; // Which café table the customer is at
     public long orderDate; // Timestamp in milliseconds
     public String status; // "pending", "confirmed", "ready"
     public double totalPrice;
 
-    public Order(int userId, String status, double totalPrice) {
+    public Order(int userId, int tableNumber, String status, double totalPrice) {
         this.userId = userId;
+        this.tableNumber = tableNumber;
         this.orderDate = System.currentTimeMillis();
         this.status = status;
         this.totalPrice = totalPrice;

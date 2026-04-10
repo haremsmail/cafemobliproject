@@ -44,15 +44,9 @@ public interface MenuDao {
     void updateMenuItem(MenuItem menuItem);
 
     /**
-     * Delete all menu items (for testing/reset)
+     * Update menu item price by name
      */
-    @Query("DELETE FROM menu_items")
-    void deleteAllMenuItems();
-
-    /**
-     * Get count of all menu items
-     */
-    @Query("SELECT COUNT(*) FROM menu_items")
-    int getMenuItemCount();
+    @Query("UPDATE menu_items SET price = :newPrice WHERE name = :itemName")
+    void updatePriceByName(String itemName, double newPrice);
 }
 

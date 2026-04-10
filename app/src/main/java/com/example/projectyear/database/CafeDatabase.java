@@ -11,7 +11,7 @@ import androidx.room.RoomDatabase;
  */
 @Database(
     entities = {User.class, MenuItem.class, Order.class, OrderItem.class},
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 public abstract class CafeDatabase extends RoomDatabase {
@@ -43,4 +43,3 @@ public abstract class CafeDatabase extends RoomDatabase {
         return instance;
     }
 }
-

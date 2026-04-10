@@ -43,7 +43,18 @@ public class AuthViewModel extends AndroidViewModel {
         executor.execute(() -> {
             String saved = usersPrefs.getString(email.trim(), null);
             if (saved != null && saved.equals(password)) {
-                saveSession(email.trim());
+                // Ensure user exists in Room DB before finishing login
+                String cleanEmail = email.trim();
+                User user = db.userDao().getUserByEmail(cleanEmail);
+                if (user == null) {
+                    // Create in Room if missing (legacy migration)
+                    long id = db.userDao().insertUser(new User(cleanEmail, password));
+                    appPrefs.edit().putInt("user_id", (int) id).apply();
+                } else {
+                    appPrefs.edit().putInt("user_id", user.id).apply();
+                }
+                
+                saveSession(cleanEmail);
                 authState.postValue(AuthState.SUCCESS);
             } else {
                 authError.postValue(AuthError.INVALID_CREDENTIALS);
@@ -62,12 +73,19 @@ public class AuthViewModel extends AndroidViewModel {
                 authState.postValue(AuthState.ERROR);
                 return;
             }
-            usersPrefs.edit().putString(email.trim(), password).apply();
-            // Also insert a Room User record
+            
+            String cleanEmail = email.trim();
+            usersPrefs.edit().putString(cleanEmail, password).apply();
+            
+            // Insert into Room and get the real ID
             try {
-                db.userDao().insertUser(new User(email.trim(), password));
-            } catch (Exception ignored) {}
-            saveSession(email.trim());
+                long userId = db.userDao().insertUser(new User(cleanEmail, password));
+                appPrefs.edit().putInt("user_id", (int) userId).commit(); // commit for immediate sync
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            saveSession(cleanEmail);
             authState.postValue(AuthState.SUCCESS);
         });
     }
@@ -81,7 +99,7 @@ public class AuthViewModel extends AndroidViewModel {
     }
 
     public int getCurrentUserId() {
-        return appPrefs.getInt("user_id", 1);
+        return appPrefs.getInt("user_id", -1);
     }
 
     public void logout() {
@@ -97,15 +115,6 @@ public class AuthViewModel extends AndroidViewModel {
     private void saveSession(String email) {
         appPrefs.edit().putString("logged_in_email", email).apply();
         loggedInEmail.postValue(email);
-        // Try to get user id from Room
-        executor.execute(() -> {
-            try {
-                User user = db.userDao().getUserByEmail(email);
-                if (user != null) {
-                    appPrefs.edit().putInt("user_id", user.id).apply();
-                }
-            } catch (Exception ignored) {}
-        });
     }
 
     private boolean validate(String email, String password, boolean isSignup) {

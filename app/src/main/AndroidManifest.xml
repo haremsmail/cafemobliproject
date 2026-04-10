@@ -31,11 +31,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Table Selection Activity -->
-        <activity
-            android:name=".TableSelectionActivity"
-            android:exported="false" />
-
         <!-- Main Activity (Home) -->
         <activity
             android:name=".MainActivity"

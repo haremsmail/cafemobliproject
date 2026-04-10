@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectyear.MainActivity;
 import com.example.projectyear.R;
 import com.example.projectyear.adapters.FeaturedItemAdapter;
-import com.example.projectyear.database.DatabaseHelper;
 import com.example.projectyear.database.MenuItem;
 import com.example.projectyear.viewmodels.AuthViewModel;
 import com.example.projectyear.viewmodels.CartViewModel;
@@ -47,12 +46,6 @@ public class HomeFragment extends Fragment {
         menuViewModel = new ViewModelProvider(requireActivity()).get(MenuViewModel.class);
         cartViewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
         authViewModel = new ViewModelProvider(requireActivity()).get(AuthViewModel.class);
-
-        // Initialize database on background thread
-        new Thread(() -> {
-            DatabaseHelper.initializeDatabase(requireContext());
-            view.post(() -> menuViewModel.loadAll());
-        }).start();
 
         setupGreeting(view);
         setupCategories(view);

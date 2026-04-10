@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/md_background">
+
+    <!-- Header Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_table_header"
+        android:padding="32dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🪑"
+            android:textSize="48sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/table_selection_title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FFFBF7"
+            android:letterSpacing="0.03"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/table_selection_subtitle"
+            android:textSize="14sp"
+            android:textColor="#D8C7C5"
+            android:letterSpacing="0.01"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <!-- Table Grid -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tables"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:clipToPadding="false"/>
+
+    <!-- Bottom Selection Status -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#10000000">
+
+        <TextView
+            android:id="@+id/tv_current_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/table_none_selected"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/md_primary"
+            android:gravity="center"
+            android:layout_marginBottom="8dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_go_to_menu"
+            style="@style/Widget.Cafe.Button"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/btn_confirm_table"
+            android:enabled="false"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -97,13 +97,24 @@
                     android:textColor="@color/md_primary"/>
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_checkout"
-                style="@style/Widget.Cafe.Button"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="@string/btn_checkout"
-                android:textSize="16sp"/>
+                android:layout_height="wrap_content">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_checkout"
+                    style="@style/Widget.Cafe.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="@string/btn_checkout"
+                    android:textSize="16sp"/>
+                <ProgressBar
+                    android:id="@+id/pb_cart_loading"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:indeterminateTint="@color/white"/>
+            </FrameLayout>
 
         </LinearLayout>
 

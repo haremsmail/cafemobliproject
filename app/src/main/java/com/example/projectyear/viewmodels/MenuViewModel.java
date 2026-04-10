@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.projectyear.database.CafeDatabase;
-import com.example.projectyear.database.DatabaseHelper;
 import com.example.projectyear.database.MenuItem;
 
 import java.util.ArrayList;
@@ -22,13 +21,11 @@ public class MenuViewModel extends AndroidViewModel {
     private final MutableLiveData<String> selectedCategory = new MutableLiveData<>("All");
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final CafeDatabase db;
-    private final Application application;
 
     public MenuViewModel(@NonNull Application application) {
         super(application);
-        this.application = application;
         db = CafeDatabase.getInstance(application);
-        // Don't load here - let fragments initialize database first
+        seedMenuIfEmpty();
     }
 
     public LiveData<List<MenuItem>> getMenuItems() { return menuItems; }
@@ -47,13 +44,8 @@ public class MenuViewModel extends AndroidViewModel {
                 } else {
                     items = db.menuDao().getMenuItemsByCategory(category);
                 }
-                // Ensure list is not null
-                if (items == null) {
-                    items = new ArrayList<>();
-                }
                 menuItems.postValue(items);
             } catch (Exception e) {
-                e.printStackTrace();
                 menuItems.postValue(new ArrayList<>());
             } finally {
                 isLoading.postValue(false);
@@ -65,25 +57,37 @@ public class MenuViewModel extends AndroidViewModel {
         loadMenu("All");
     }
 
-    /**
-     * Manually reseed the database (useful for development)
-     */
-    public void reseedDatabase() {
+    private void seedMenuIfEmpty() {
         executor.execute(() -> {
-            DatabaseHelper.reseedDatabase(application);
-            // Reload menu after reseeding
-            loadAll();
+            try {
+                List<MenuItem> existing = db.menuDao().getAllMenuItems();
+                if (existing == null || existing.isEmpty()) {
+                    insertSeedData();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 
-    /**
-     * Clear all menu items (useful for testing)
-     */
-    public void clearMenuItems() {
-        executor.execute(() -> {
-            DatabaseHelper.clearMenuItems(application);
-            menuItems.postValue(new ArrayList<>());
-        });
+    private void insertSeedData() {
+        // Coffee ☕
+        db.menuDao().insertMenuItem(new MenuItem("Espresso", "Rich, bold shot of pure coffee", 1500.0, "Coffee", 0));
+        db.menuDao().insertMenuItem(new MenuItem("Café Latte", "Espresso with creamy steamed milk", 2000.0, "Coffee", 0));
+        db.menuDao().insertMenuItem(new MenuItem("Cappuccino", "Equal parts espresso, milk & foam", 2000.0, "Coffee", 0));
+        db.menuDao().insertMenuItem(new MenuItem("Americano", "Smooth espresso diluted with water", 1500.0, "Coffee", 0));
+        db.menuDao().insertMenuItem(new MenuItem("Mocha", "Chocolate-infused espresso with milk", 2500.0, "Coffee", 0));
+        db.menuDao().insertMenuItem(new MenuItem("Macchiato", "Espresso with a dash of foam", 2000.0, "Coffee", 0));
+        db.menuDao().insertMenuItem(new MenuItem("Iced Coffee", "Cold brewed coffee over ice", 2500.0, "Coffee", 0));
+        db.menuDao().insertMenuItem(new MenuItem("Flat White", "Velvety micro-foam over espresso", 2500.0, "Coffee", 0));
+        // Tea 🍵
+        db.menuDao().insertMenuItem(new MenuItem("Green Tea", "Delicate, antioxidant-rich green tea", 1500.0, "Tea", 0));
+        db.menuDao().insertMenuItem(new MenuItem("Black Tea", "Classic bold Ceylon black tea", 1500.0, "Tea", 0));
+        db.menuDao().insertMenuItem(new MenuItem("Chamomile", "Soothing floral herbal infusion", 1500.0, "Tea", 0));
+        // Desserts 🍰
+        db.menuDao().insertMenuItem(new MenuItem("Chocolate Brownie", "Warm fudgy brownie with nuts", 1500.0, "Desserts", 0));
+        db.menuDao().insertMenuItem(new MenuItem("Butter Croissant", "Flaky golden French croissant", 1500.0, "Desserts", 0));
+        db.menuDao().insertMenuItem(new MenuItem("Cheesecake", "Creamy New York-style cheesecake", 2000.0, "Desserts", 0));
     }
 
     @Override

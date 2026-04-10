@@ -134,4 +134,13 @@
     <string name="btn_view_orders_btn">View Orders</string>
     <string name="menu_subtitle">Fresh brews &amp; treats</string>
     <string name="msg_order_placed">Order placed successfully!</string>
+
+    <!-- Table Selection -->
+    <string name="nav_table">Table</string>
+    <string name="table_selection_title">Choose Your Table</string>
+    <string name="table_selection_subtitle">Pick where you\'re sitting to start ordering</string>
+    <string name="table_selected_label">Selected: Table %d</string>
+    <string name="table_none_selected">Please select a table to continue</string>
+    <string name="btn_confirm_table">Confirm Table</string>
+    <string name="table_current_label">Sitting at Table %d</string>
 </resources>
