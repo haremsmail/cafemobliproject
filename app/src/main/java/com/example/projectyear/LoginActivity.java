@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void navigateToMain() {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, TableSelectionActivity.class));
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }

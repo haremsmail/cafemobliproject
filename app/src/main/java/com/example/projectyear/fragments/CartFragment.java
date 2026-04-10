@@ -25,6 +25,8 @@ import com.example.projectyear.viewmodels.OrderViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Locale;
+
 public class CartFragment extends Fragment {
 
     private CartViewModel cartViewModel;
@@ -34,7 +36,6 @@ public class CartFragment extends Fragment {
     private LinearLayout llCartEmpty;
     private RecyclerView rvCart;
     private TextView tvSubtotal, tvTax, tvTotal;
-    private MaterialButton btnCheckout;
 
     @Nullable
     @Override
@@ -56,7 +57,7 @@ public class CartFragment extends Fragment {
         tvSubtotal = view.findViewById(R.id.tv_subtotal);
         tvTax = view.findViewById(R.id.tv_tax);
         tvTotal = view.findViewById(R.id.tv_total);
-        btnCheckout = view.findViewById(R.id.btn_checkout);
+        MaterialButton btnCheckout = view.findViewById(R.id.btn_checkout);
         MaterialButton btnGoToMenu = view.findViewById(R.id.btn_go_to_menu);
 
         setupRecyclerView();
@@ -96,11 +97,11 @@ public class CartFragment extends Fragment {
         });
 
         cartViewModel.getSubtotal().observe(getViewLifecycleOwner(), sub ->
-            tvSubtotal.setText(String.format("IQD %.0f", sub)));
+            tvSubtotal.setText(String.format(Locale.US, "IQD %.0f", sub)));
         cartViewModel.getTax().observe(getViewLifecycleOwner(), tax ->
-            tvTax.setText(String.format("IQD %.0f", tax)));
+            tvTax.setText(String.format(Locale.US, "IQD %.0f", tax)));
         cartViewModel.getTotal().observe(getViewLifecycleOwner(), total ->
-            tvTotal.setText(String.format("IQD %.0f", total)));
+            tvTotal.setText(String.format(Locale.US, "IQD %.0f", total)));
 
         orderViewModel.getLastOrderId().observe(getViewLifecycleOwner(), orderId -> {
             if (orderId != null && orderId > 0) {

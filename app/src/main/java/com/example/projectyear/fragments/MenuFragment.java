@@ -53,7 +53,12 @@ public class MenuFragment extends Fragment {
         setupChipFilter(view);
         observeViewModel();
 
-        menuViewModel.loadAll();
+        // Initialize database and load menu items
+        new Thread(() -> {
+            com.example.projectyear.database.DatabaseHelper.initializeDatabase(requireContext());
+            // Load menu on main thread after initialization
+            view.post(() -> menuViewModel.loadAll());
+        }).start();
     }
 
     private void setupRecyclerView() {

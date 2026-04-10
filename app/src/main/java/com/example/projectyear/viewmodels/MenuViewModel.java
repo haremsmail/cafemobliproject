@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.projectyear.database.CafeDatabase;
+import com.example.projectyear.database.DatabaseHelper;
 import com.example.projectyear.database.MenuItem;
 
 import java.util.ArrayList;
@@ -21,11 +22,13 @@ public class MenuViewModel extends AndroidViewModel {
     private final MutableLiveData<String> selectedCategory = new MutableLiveData<>("All");
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final CafeDatabase db;
+    private final Application application;
 
     public MenuViewModel(@NonNull Application application) {
         super(application);
+        this.application = application;
         db = CafeDatabase.getInstance(application);
-        seedMenuIfEmpty();
+        // Don't load here - let fragments initialize database first
     }
 
     public LiveData<List<MenuItem>> getMenuItems() { return menuItems; }
@@ -44,8 +47,13 @@ public class MenuViewModel extends AndroidViewModel {
                 } else {
                     items = db.menuDao().getMenuItemsByCategory(category);
                 }
+                // Ensure list is not null
+                if (items == null) {
+                    items = new ArrayList<>();
+                }
                 menuItems.postValue(items);
             } catch (Exception e) {
+                e.printStackTrace();
                 menuItems.postValue(new ArrayList<>());
             } finally {
                 isLoading.postValue(false);
@@ -57,37 +65,25 @@ public class MenuViewModel extends AndroidViewModel {
         loadMenu("All");
     }
 
-    private void seedMenuIfEmpty() {
+    /**
+     * Manually reseed the database (useful for development)
+     */
+    public void reseedDatabase() {
         executor.execute(() -> {
-            try {
-                List<MenuItem> existing = db.menuDao().getAllMenuItems();
-                if (existing == null || existing.isEmpty()) {
-                    insertSeedData();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            DatabaseHelper.reseedDatabase(application);
+            // Reload menu after reseeding
+            loadAll();
         });
     }
 
-    private void insertSeedData() {
-        // Coffee ☕
-        db.menuDao().insertMenuItem(new MenuItem("Espresso", "Rich, bold shot of pure coffee", 150.0, "Coffee", 0));
-        db.menuDao().insertMenuItem(new MenuItem("Café Latte", "Espresso with creamy steamed milk", 220.0, "Coffee", 0));
-        db.menuDao().insertMenuItem(new MenuItem("Cappuccino", "Equal parts espresso, milk & foam", 230.0, "Coffee", 0));
-        db.menuDao().insertMenuItem(new MenuItem("Americano", "Smooth espresso diluted with water", 190.0, "Coffee", 0));
-        db.menuDao().insertMenuItem(new MenuItem("Mocha", "Chocolate-infused espresso with milk", 260.0, "Coffee", 0));
-        db.menuDao().insertMenuItem(new MenuItem("Macchiato", "Espresso with a dash of foam", 200.0, "Coffee", 0));
-        db.menuDao().insertMenuItem(new MenuItem("Iced Coffee", "Cold brewed coffee over ice", 240.0, "Coffee", 0));
-        db.menuDao().insertMenuItem(new MenuItem("Flat White", "Velvety micro-foam over espresso", 250.0, "Coffee", 0));
-        // Tea 🍵
-        db.menuDao().insertMenuItem(new MenuItem("Green Tea", "Delicate, antioxidant-rich green tea", 160.0, "Tea", 0));
-        db.menuDao().insertMenuItem(new MenuItem("Black Tea", "Classic bold Ceylon black tea", 150.0, "Tea", 0));
-        db.menuDao().insertMenuItem(new MenuItem("Chamomile", "Soothing floral herbal infusion", 170.0, "Tea", 0));
-        // Desserts 🍰
-        db.menuDao().insertMenuItem(new MenuItem("Chocolate Brownie", "Warm fudgy brownie with nuts", 180.0, "Desserts", 0));
-        db.menuDao().insertMenuItem(new MenuItem("Butter Croissant", "Flaky golden French croissant", 140.0, "Desserts", 0));
-        db.menuDao().insertMenuItem(new MenuItem("Cheesecake", "Creamy New York-style cheesecake", 200.0, "Desserts", 0));
+    /**
+     * Clear all menu items (useful for testing)
+     */
+    public void clearMenuItems() {
+        executor.execute(() -> {
+            DatabaseHelper.clearMenuItems(application);
+            menuItems.postValue(new ArrayList<>());
+        });
     }
 
     @Override

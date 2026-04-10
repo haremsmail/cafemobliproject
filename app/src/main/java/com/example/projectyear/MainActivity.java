@@ -18,16 +18,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AuthViewModel authViewModel;
     private CartViewModel cartViewModel;
     private BottomNavigationView bottomNav;
+    private int tableNumber = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
+        // Get table number from intent
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("TABLE_NUMBER")) {
+            tableNumber = intent.getIntExtra("TABLE_NUMBER", -1);
+            setTitle("Table " + tableNumber);
+        }
+
+        AuthViewModel authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
 
         // Guard: redirect to login if not authenticated
         if (!authViewModel.isLoggedIn()) {
@@ -42,9 +49,14 @@ public class MainActivity extends AppCompatActivity {
         setupBottomNav();
         observeCart();
 
-        // Default to Home
+        // Default to Menu if coming from table selection
         if (savedInstanceState == null) {
-            loadFragment(new HomeFragment());
+            if (tableNumber != -1) {
+                loadFragment(new MenuFragment());
+                bottomNav.setSelectedItemId(R.id.nav_menu);
+            } else {
+                loadFragment(new HomeFragment());
+            }
         }
     }
 
